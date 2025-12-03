@@ -9,26 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Future: Add crew logic here
   });
 
-  // Fetch and display 4-day weather forecast for Singapore (Pasir Ris)
+  // Fetch and display general 4-day weather forecast for Singapore
   fetch('https://api.data.gov.sg/v1/environment/4-day-weather-forecast')
     .then(response => response.json())
     .then(data => {
-      const area = 'Pasir Ris';
-      const forecasts = data.items[0].forecasts;
-      const areaForecast = forecasts.find(f => f.area === area);
+      const periods = data.items[0].periods;
       let html = '<div class="forecast-list">';
-      if (areaForecast) {
-        html += `<div><strong>${areaForecast.area}</strong></div>`;
-        html += `<div>${areaForecast.forecast}</div>`;
-      } else {
-        html += '<div>Forecast not available for Pasir Ris.</div>';
-      }
-      html += '</div>';
-      // 4-day summary
-      html += '<hr><div><strong>4-Day Outlook:</strong></div>';
-      data.items[0].periods.forEach(period => {
-        html += `<div style="margin-bottom:0.5em;"><strong>${period.date}</strong>: ${period.forecast}</div>`;
+      periods.forEach(period => {
+        html += `<div style="margin-bottom:1em; padding:0.5em; background:#e3f2fd; border-radius:6px;">
+          <strong>${period.date}</strong><br>
+          <span>${period.forecast}</span>
+        </div>`;
       });
+      html += '</div>';
       document.getElementById('weather').innerHTML = html;
     })
     .catch(() => {
