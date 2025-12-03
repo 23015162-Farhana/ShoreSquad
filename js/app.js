@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Future: Add crew logic here
   });
 
-  // Placeholder for map and weather
-  document.getElementById('map').textContent = 'Map will appear here.';
+  // Placeholder for weather
   document.getElementById('weather').textContent = 'Weather info will appear here.';
 });
